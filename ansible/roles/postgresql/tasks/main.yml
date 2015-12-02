@@ -1,0 +1,7 @@
+---
+- name: Install PostgreSQL Packages
+  apt: pkg={{ item }} state=present
+  with_items:
+    - postgresql
+    - postgresql-client
+    - postgresql-contrib

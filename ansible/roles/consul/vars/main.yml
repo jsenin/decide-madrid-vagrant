@@ -1,0 +1,7 @@
+app_dir: /vagrant
+db_username: vagrant
+db_password: 12345678
+db_host: localhost
+db_development_name: consul_development
+db_test_name: consul_test
+   

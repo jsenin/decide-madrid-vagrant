@@ -1,0 +1,10 @@
+---
+- name: Apt-get update before installing
+  apt: update_cache=yes
+
+- name: Install Essential Packages
+  apt: pkg={{ item }} state=present
+  with_items:
+    - curl 
+    - gnupg2
+    - git-core

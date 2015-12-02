@@ -1,0 +1,13 @@
+---
+- name: add gpg keyserver 
+  shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  sudo: false
+
+- name: download rvm and install ruby
+  shell: \curl -sSL https://get.rvm.io |  bash -s stable --ruby
+  sudo: false
+
+- name: Installing addtional packages ( nodejs... ) 
+  apt: pkg={{ item }} state=present
+  with_items:
+    - nodejs

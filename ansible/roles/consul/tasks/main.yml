@@ -1,0 +1,37 @@
+---
+- name: install ruby 2.2.3 using rvm
+  shell: /bin/bash -c "source ~/.rvm/scripts/rvm && rvm install ruby-2.2.3"
+  sudo: false
+
+- name: install PostgreSQL devel for bundle
+  apt: pkg=postgresql-server-dev-9.4 state=present
+
+- name: install bundle gem and run
+  shell: /bin/bash -c "source ~/.rvm/scripts/rvm && cd {{ app_dir }} && gem install bundle && bundle install"
+  sudo: false
+
+- name: copying secret template 
+  shell: cp  {{ app_dir }}/config/secrets.yml.example {{ app_dir }}/config/secrets.yml
+  sudo: false
+
+- name: copying database template 
+  shell: cp  {{ app_dir }}/config/database.yml.example {{ app_dir }}/config/database.yml
+  sudo: false
+
+- name: configuring database file using my own template
+  template: src=database.yml dest={{ app_dir }}/config/database.yml 
+  sudo: false
+
+- name: configure postresql auth for vagrant user
+  script: postgresql_setup_user.sh  {{ db_username }} {{ db_password }} {{ db_test_name }}
+
+- name: configure postresql auth for vagrant user
+  script: postgresql_setup_user.sh  {{ db_username }} {{ db_password }} {{ db_development_name }}
+
+- name: pouplate production database
+  shell: /bin/bash -c "source ~/.rvm/scripts/rvm && cd {{ app_dir }} && bin/rake db:setup"
+  sudo: false 
+
+- name: pouplate testing database
+  shell: /bin/bash -c "source ~/.rvm/scripts/rvm && cd {{ app_dir }} && RAILS_ENV=test bin/rake db:setup"
+  sudo: false

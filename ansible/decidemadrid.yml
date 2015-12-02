@@ -1,0 +1,11 @@
+---
+- name: Deploys the whole software stack for https://github.com/AyuntamientoMadrid/consul application
+  hosts: all
+  user: vagrant
+  sudo: yes
+
+  roles:
+    - system
+    - rvm 
+    - postgresql
+    - consul 
