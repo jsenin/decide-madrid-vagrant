@@ -6,8 +6,8 @@ you need to have vagrant, ansible and git in your box
 ```
 sudo apt-get install vagrant ansible git
 
-git clone https://github.com/jsenin/transparencia-madrid-vagrant 
-cd transparencia-madrid-vagrant
+git clone https://github.com/jsenin/decide-madrid-vagrant 
+cd decide-madrid-vagrant
 git submodule update --init
 vagrant up
 ```
