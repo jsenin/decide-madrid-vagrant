@@ -27,6 +27,9 @@ vagrant ssh
 and run rails sever
 ```
 cd /vagrant
-bin/rails s
+bin/rails s -b 0.0.0.0
+```
+
+Access to the server at http://localhost:3000 
 
 
